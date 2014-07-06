@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Page Transitions</title>
+    <style type="text/css">
+
+        body {
+            overflow: hidden;
+        }
+
+        .page {
+            position: absolute;
+            padding: 12px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+.page.left {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+.page.center {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.page.right {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+}
+
+        .page.transition {
+            -webkit-transition-duration: .25s;
+            transition-duration: .25s;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div id="homePage" class="page center" style="background-color: #add55a">
+    <h1>Home Page</h1>
+	<ul>
+    <li><a id='1' class="emp" href="">Bert</a></li>
+    <li><a id='2' class="emp" href="">Ernie</a></li>
+    <li><a id='3' class="emp" href="">Oscar</a></li>
+    <li><a id='4' class="emp" href="">Big Bird</a></li>
+</div>
+
+<div id="p1" class="page right" style="background-color: #8ca83d">
+    <h1>Page 1</h1>
+    <a id="detail" class="detail" href="javascript:slidePageFrom(homePage, 'left');">Back</a>
+</div>
+<script type="text/javascript" src="phonegap.js"></script>
+
+<!---
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+    app.initialize();
+</script>
+--->
+<script>
+
+$(document).ready(function() {
+    // are we running in native app or in a browser?
+    window.isphone = false;
+    if(document.URL.indexOf("http://") === -1 
+        && document.URL.indexOf("https://") === -1) {
+        window.isphone = true;
+    }
+
+    if( window.isphone ) {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    } else {
+        onDeviceReady();
+    }
+});
+
+function onDeviceReady() {
+    // do everything here.
+	
+
+//var theElement = document.getElementsByClassName('emp');
+
+document.addEventListener("mouseup", tapOrClick, false);
+document.addEventListener("touchend", tapOrClick, false);
+
+function tapOrClick(event) {
+    //handle tap or click.
+	//alert(event.target.className);
+	//alert(event.target.id);
+	if(event.target.className === 'emp'){
+		slidePageFrom(page1, 'right');
+		gogetdetails(event.target.id);
+	}
+	if(event.target.className === 'detail'){
+		slidePageFrom(homePage, 'left');
+	}	
+    event.preventDefault();
+    return false;
+}
+
+var homePage = document.getElementById("homePage"),
+    page1 = document.getElementById("p1"),
+    currentPage = homePage;
+
+    function slidePageFrom(page, from) {
+        // Position the page at the starting position of the animation
+        page.className = "page " + from;
+        // Position the new page and the current page at the ending position of their animation with a transition class indicating the duration of the animation
+        page.className ="page transition center";
+        currentPage.className = "page transition " + (from === "left" ? "right" : "left");
+        currentPage = page;
+    }
+	
+	function gogetdetails(id){
+	  alert('user id: ' + id );
+	}
+	
+}//end ondeviceready
+
+	
+	
+	
+
+</script>
+
+</body>
+</html>
+<!---
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+        <div class="app">
+            <h1>PhoneGap</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+        </div>
+        <script type="text/javascript" src="phonegap.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
+--->
