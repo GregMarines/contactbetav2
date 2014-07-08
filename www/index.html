@@ -99,6 +99,8 @@ function tapOrClick(event) {
 		var foo = slidePageFrom(page1, 'right');
 
 		gogetdetails(event.target.id);
+		myWebview.scrollTo(1, 0);
+		myWebview.scrollTo(0, 0);
 
 	}
 	if(event.target.className == 'detail'){
