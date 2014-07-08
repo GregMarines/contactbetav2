@@ -1,11 +1,7 @@
-<!DOCTYPE html>
 <html>
 <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Page Transitions</title>
+    <title>Page Slider</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <style type="text/css">
 
         body {
@@ -41,11 +37,10 @@
             transition-duration: .25s;
         }
 
-	ul li{margin:40px 0; size:2em;}
     </style>
 
 </head>
-<body>
+<body onload="init();">
 
 <div id="homePage" class="page center" style="background-color: #add55a">
     <h1>Home Page</h1>
@@ -61,12 +56,11 @@
     <h1>Page 1</h1>
     <a id="detail" class="detail" href="javascript:slidePageFrom(homePage, 'left');">Back</a>
 </div>
-<script type="text/javascript" src="phonegap.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>
-
 <script>
 
-$(document).ready(function() {
+   function init() {
+
     // are we running in native app or in a browser?
     window.isphone = false;
     if(document.URL.indexOf("http://") === -1 
@@ -79,16 +73,16 @@ $(document).ready(function() {
     } else {
         onDeviceReady();
     }
-});
+};
 
 function onDeviceReady() {
     // do everything here.
 	
 
-//var theElement = document.getElementsByClassName('emp');
+var theElement = document.getElementsById('homePage');
 
-document.addEventListener("mouseup", tapOrClick, false);
-document.addEventListener("touchend", tapOrClick, false);
+theElement.addEventListener("mouseup", tapOrClick, false);
+theElement.addEventListener("touchend", tapOrClick, false);
 
 function tapOrClick(event) {
     //handle tap or click.
@@ -119,7 +113,7 @@ var homePage = document.getElementById("homePage"),
     }
 	
 	function gogetdetails(id){
-	 // alert('user id: ' + id );
+	  alert('user id: ' + id );
 	}
 	
 }//end ondeviceready
