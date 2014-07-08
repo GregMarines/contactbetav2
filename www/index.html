@@ -46,9 +46,12 @@
     <h1>Home Page</h1>
 	<ul>
     <li ><a id='1' class="emp" href="http://google.com">Bert</a></li>
+	<br /><br /><br />
     <li><a id='2' class="empxx" href="">Ernie</a></li>
-    <li><a id='3' class="empx" href="">Oscar</a></li>
-    <li><a id='4' class="empx" href="">Big Bird</a></li>
+    <br /><br /><br />
+	<li><a id='3' class="empx" href="">Oscar</a></li>
+    <br /><br /><br />
+	<li><a id='4' class="empx" href="">Big Bird</a></li>
 	</ul>
 </div>
 
@@ -96,13 +99,13 @@ function tapOrClick(event) {
 		var foo = slidePageFrom(page1, 'right');
 
 		gogetdetails(event.target.id);
-    event.preventDefault();
-    return false;
+
 	}
 	if(event.target.className == 'detail'){
 		slidePageFrom(homePage, 'left');
 	}	
-     
+         event.preventDefault();
+    return false;
 };
 
 var homePage = document.getElementById("homePage"),
@@ -121,7 +124,7 @@ var homePage = document.getElementById("homePage"),
 	
 	function gogetdetails(id){
 
-    console.log('user id: ' + id );
+    alert('user id: ' + id );
 
 	  
 	};
