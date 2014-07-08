@@ -45,18 +45,23 @@
 <div id="homePage" class="page center" style="background-color: #add55a">
     <h1>Home Page</h1>
 	<ul>
-    <li><a id='1' class="emp" href="">Bert</a></li>
-    <li><a id='2' class="emp" href="">Ernie</a></li>
-    <li><a id='3' class="emp" href="">Oscar</a></li>
-    <li><a id='4' class="emp" href="">Big Bird</a></li>
+    <li ><a id='1' class="emp" href="http://google.com">Bert</a></li>
+    <li><a id='2' class="empxx" href="">Ernie</a></li>
+    <li><a id='3' class="empx" href="">Oscar</a></li>
+    <li><a id='4' class="empx" href="">Big Bird</a></li>
 	</ul>
 </div>
 
 <div id="p1" class="page right" style="background-color: #8ca83d">
     <h1>Page 1</h1>
-    <a id="detail" class="detail" href="javascript:slidePageFrom(homePage, 'left');">Back</a>
+    <a id="detail" class="detail" href="">Back</a>
 </div>
-<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script>
+			$(function(){
+				init();
+			});
+		</script>
 <script>
 
    function init() {
@@ -79,25 +84,26 @@ function onDeviceReady() {
     // do everything here.
 	
 
-var theElement = document.getElementsById('1');
+var theElement = document.getElementById('1');
 
-theElement.addEventListener("mouseup", tapOrClick, false);
-theElement.addEventListener("touchend", tapOrClick, false);
+//theElement.addEventListener("mouseup", tapOrClick, false);
+theElement.addEventListener("touchstart", tapOrClick, true);
 
 function tapOrClick(event) {
     //handle tap or click.
-	//alert(event.target.className);
-	//alert(event.target.id);
-	if(event.target.className === 'emp'){
-		slidePageFrom(page1, 'right');
+
+	if(event.target.className == 'emp'){
+		var foo = slidePageFrom(page1, 'right');
+
 		gogetdetails(event.target.id);
-	}
-	if(event.target.className === 'detail'){
-		slidePageFrom(homePage, 'left');
-	}	
     event.preventDefault();
     return false;
-}
+	}
+	if(event.target.className == 'detail'){
+		slidePageFrom(homePage, 'left');
+	}	
+     
+};
 
 var homePage = document.getElementById("homePage"),
     page1 = document.getElementById("p1"),
@@ -110,13 +116,17 @@ var homePage = document.getElementById("homePage"),
         page.className ="page transition center";
         currentPage.className = "page transition " + (from === "left" ? "right" : "left");
         currentPage = page;
-    }
+		return currentPage
+    };
 	
 	function gogetdetails(id){
-	  alert('user id: ' + id );
-	}
+
+    console.log('user id: ' + id );
+
+	  
+	};
 	
-}//end ondeviceready
+};//end ondeviceready
 
 	
 	
