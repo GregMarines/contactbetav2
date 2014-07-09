@@ -71,7 +71,7 @@
 <script>
 
    function init() {
-
+alert('here');
     // are we running in native app or in a browser?
     window.isphone = false;
     if(document.URL.indexOf("http://") === -1 
@@ -84,12 +84,12 @@
     } else {
         onDeviceReady();
     }
-};
+}
 
 function onDeviceReady() {
     // do everything here.
 	
-alert('here');
+
 var theElement = document.getElementById('1');
 
 //theElement.addEventListener("mouseup", tapOrClick, false);
