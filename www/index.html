@@ -42,7 +42,7 @@
     </style>
 
 </head>
-<body onload="init();">
+<body>
 
 <div id="homePage" class="page center" style="background-color: #add55a">
     <h1>Home Page</h1>
@@ -61,20 +61,7 @@
     <h1>Page 1</h1>
     <a id="detail" class="detail" href="">Back</a>
 </div>
-<script type="text/javascript">    // Test for Android Chrome < M33, since there's a nasty bug when preloading.
-    // Preloaded web pages in older Chrome don't provide touch events.
-    if ( document.webkitVisibilityState == 'prerender' ) {
-        var ver = window.navigator.appVersion.match( /Android.+Chrome\/(\d+)\./ );
-        if ( ver != null ) {
-            var version = parseInt( ver[1], 10 );
-            if ( version < 33 ) {
-                // This alert will never be seen, since it will only be invoked during preloading,
-                // but it will abort the preloading and force regular loading
-                alert( "Please reload this page." );
-            }
-        };
-    }
-</script>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script>
 			$(function(){
@@ -106,15 +93,16 @@ function onDeviceReady() {
 var theElement = document.getElementById('1');
 
 //theElement.addEventListener("mouseup", tapOrClick, false);
-theElement.addEventListener("touchstart", tapOrClick, true);
+theElement.addEventListener("touchstart", tapOrClick, false);
 
 function tapOrClick(event) {
     //handle tap or click.
 
 	if(event.target.className == 'emp'){
-		var foo = slidePageFrom(page1, 'right');
+		slidePageFrom(page1, 'right');
 
 		gogetdetails(event.target.id);
+
 
 
 	}
@@ -122,7 +110,7 @@ function tapOrClick(event) {
 		slidePageFrom(homePage, 'left');
 	}	
          
-    return false;
+    
 };
 
 var homePage = document.getElementById("homePage"),
@@ -136,7 +124,7 @@ var homePage = document.getElementById("homePage"),
         page.className ="page transition center";
         currentPage.className = "page transition " + (from === "left" ? "right" : "left");
         currentPage = page;
-		return currentPage
+
     };
 	
 	function gogetdetails(id){
